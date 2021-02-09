@@ -1,0 +1,48 @@
+body {
+    background-image: url(https://image.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1095.jpg);
+    background-size: cover;
+}
+
+.clock {
+    background: url(../../assets/img/clock.png);
+    background-size: contain;
+    width: 80%;
+    height: 200px;
+    background-repeat: no-repeat;
+}
+
+.main-clock {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-3px);
+    /* account for the height of the clock hands */
+}
+
+.line {
+    position: absolute;
+    top: 51%;
+    right: 80%;
+    transform-origin: 100%;
+    transform: rotate( 90deg);
+    transition: all 0.05s;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+
+.hour {
+    width: 12%;
+    height: 3px;
+    background: black;
+}
+
+.minute {
+    width: 14%;
+    height: 1px;
+    background: black;
+}
+
+.second {
+    width: 16%;
+    height: 0.5px;
+    background: rgb(255, 0, 0);
+}
