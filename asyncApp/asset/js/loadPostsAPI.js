@@ -92,7 +92,7 @@ function loadDataNew() {
 
 `;
             });
-            loading.classList.remove('active')
+           // loading.classList.remove('active')
             postDiv3.innerHTML = output;
         })
         .catch(function(err) {

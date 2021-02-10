@@ -1,30 +1,61 @@
-const slides = document.querySelectorAll('.slide-img')
+console.clear();
+initslider();
+function initslider() {
+    const elPrevButton = document.querySelector('.slider #prev');
+    const elNextButton = document.querySelector('.slider #next');
 
-let slider = 0
+    const elImages = Array.from(document.querySelectorAll('.slider .image'));
 
-function transation() {
-    // const activeSlide = document.querySelector(".active")
-    // activeSlide
-    // activeSlide.classList.remove('active')
-    if (slider == 2) {
-        slider = 0
-    } else {
-        slider += 1
+    let state = {
+        photo: 0
+    };
+
+    function send(event) {
+
+        const elActives = document.querySelectorAll('.slider [data-active]');
+
+        Array.from(elActives)
+            .forEach(el => el.removeAttribute('data-active'));
+
+        switch (event) {
+            case 'PREV':
+                state.photo--;
+                // Math.max(state.photo - 1, 0);
+                break;
+            case 'NEXT':
+                state.photo++;
+                // Math.min(state.photo + 1, elImages.length - 1);
+                break;
+            default:
+                state.photo = +event;
+                break;
+        }
+
+        var len = elImages.length;
+        // Loop Around
+        //state.photo = ( ( state.photo % len) + len ) % len;
+        state.photo = Math.max(0, Math.min(state.photo, len - 1));
+
+        Array.from(document.querySelectorAll(`.slider [data-key="${state.photo}"]`))
+            .forEach(el => {
+                el.setAttribute('data-active', true);
+            });
+
+
     }
+    elPrevButton.addEventListener('click', () => {
+        send('PREV');
+    });
 
-    if (slider == 0) {
-        slides[2].classList.remove('active')
-    } else {
-        slides[slider - 1].remove('active')
-    }
-    slides[slider].classList.add('active')
-    console.log(slides[slider])
-        // const newSlider = slides[slider];
-        // console.log(newSlider)
-}
+    elNextButton.addEventListener('click', () => {
+        send('NEXT');
+    });
 
-
-setInterval(transation, 1000)
-    // slides.forEach(function(slide) {
-    //     let activeSlide = slide.
-    // });
+    const elStatus = Array.from(document.querySelectorAll('.slider .stat'));
+    elStatus.forEach(stat => {
+        stat.addEventListener('click', () => {
+            send(stat.dataset.key);
+        });
+    });
+    send(0);
+};

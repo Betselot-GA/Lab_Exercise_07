@@ -45,10 +45,8 @@ function loadPost() {
             </div>
         </div>
         `;
-
-            // Assign it to the DIV
-            postDiv.innerHTML = output;
         }
+        
     }
 
     // Send the Request 
